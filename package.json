@@ -1,0 +1,22 @@
+{
+  "name": "chalk-talk",
+  "version": "1.0.0",
+  "description": "Draw a passing play, pick a defense, and simulate it a thousand times on real NFL tracking data. An AI coordinator critiques it.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build:model": "python build/build_tables.py",
+    "verify": "node scripts/verify.mjs"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.0.0"
+  }
+}
