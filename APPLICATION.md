@@ -4,21 +4,21 @@ A draft answer for the Mays Applied AI Fellow prompt, "describe something you ha
 
 ---
 
-**Chalk Talk: draw a football play and simulate it on real NFL tracking data**
+**Chalk Talk: call a play for any college team, scored by what actually happened**
 
 Live demo: [link]. Source: https://github.com/s155003/chalk-talk
 
-Every football fan has drawn a play on a napkin. None of them know whether it would work. Chalk Talk is a whiteboard where you put five receivers on the field, give each a route, pick the coverage or a real 2022 NFL defense, and run the play a thousand times. The numbers that come back are not made up: they are sampled from what actually happened when those routes were run against that coverage in the NFL's player-tracking data.
+Every Saturday, millions of people yell at a coordinator for the call he just made. None of them can check whether they were right. Chalk Talk lets you call the play yourself, for any of the 138 FBS programs against any defense, and scores it with real plays from this season.
 
-The data is the Big Data Bowl 2025 release, nine weeks of the 2022 season with every player's position ten times a second, plus the route each receiver ran and the coverage the defense played. From it I built a set of tables: how much separation each route produces against each coverage at the moment the ball is thrown, split by whether the receiver lines up outside or in the slot; the average path of every route and of the defender covering it; how often each coverage produces a sack; how far receivers run after the catch; and how much tighter or looser each of the 32 defenses played than expected. On top of those I fitted three small models on the same plays: which receiver the quarterback throws to given how open everyone is, whether the pass is completed, and whether it is intercepted. Every outcome is converted to expected points for the down and distance you set, so the simulator knows that four yards on third and three is a good play and eight yards on third and twelve is not.
+You pick an offense and a defense. The board shows both teams' actual starters, inferred from the play-by-play: who carries, who gets targeted, who makes plays on defense. You pick a situation and a call: hand it to a specific back, keep it with the quarterback, or throw to a specific receiver. The simulator then plays the snap a thousand times, and every one of those snaps is a real play. Half are drawn from what that offense, or that player, has done on that kind of play this season, narrowed to the same down and distance when there are enough of them. Half are drawn from what that defense has actually allowed. Each keeps its real yards, sacks, interceptions and fumbles, then gets converted into expected points for the situation you set, so four yards on third and three scores better than eight on third and twelve. One button compares every available call and ranks them. A scouting report shows what each side has done against the national average, down by down.
 
-The AI is an offensive coordinator played by Claude. It has the simulator as a tool. Ask it to critique your play and it runs the play, reads the result, and tells you which receiver cannot beat man coverage and why your check-down is losing you points. Ask it for a play that beats Cover 3 on third and eight and it designs one, simulates it, draws it on your board, and explains the numbers. It is instructed never to quote a number it did not get from a run, and the results panel next to it is pure arithmetic, so you can check it.
+The AI is an offensive coordinator played by Claude. It has the simulator, the comparison and the scouting report as tools. Ask it what to call on third and four and it runs the numbers, puts its choice on the board, and tells you why in a few sentences, including how big the sample is and when the defense's history is doing most of the work. It is instructed never to quote a number it did not get from a tool, and everything on the results panel is arithmetic you can check against it.
 
-I also tell users what the simulator does not know: protection, play action, motion, specific defenders, and the quarterback's progression. The target-choice model, fitted honestly, only gets the real target right a third of the time, which says something true about how hard quarterbacks are to predict, and the page says so.
+There is a second page built on NFL player-tracking data, where you draw routes and see how open they really get against each coverage. That one taught me the method; the college page is where I wanted to use it, because that is the data people argue about on Saturdays.
 
-What I learned: the valuable part of an AI product is deciding what the model decides and what the code decides. The model plays the coach because that takes judgment. The code holds the data and runs the simulation because that has to be right every time.
+What I learned building it: the hard decision in an AI product is what the model decides and what the code decides. The code holds every play and does the scoring, because that has to be right every time and has to be checkable. The model reads the results and coaches, because that takes judgment. I also learned to say what the data cannot tell you: the public feed has no tackles, no formations and no coverages, and the page says so.
 
-Built with vanilla JavaScript, Node serverless functions, Python for the data pipeline, and the Claude API with tool use. The simulation runs in the browser in about fifteen milliseconds.
+Built with vanilla JavaScript, Node serverless functions, Python for the data pipeline, and the Claude API with tool use. Data: cfbfastR play-by-play updated weekly, and the NFL Big Data Bowl.
 
 ---
 

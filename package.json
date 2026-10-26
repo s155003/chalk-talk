@@ -8,7 +8,9 @@
     "dev": "node server.js",
     "start": "node server.js",
     "build:model": "python build/build_tables.py",
-    "verify": "node scripts/verify.mjs"
+    "build:cfb": "python build/build_cfb.py",
+    "verify": "node scripts/verify.mjs http://localhost:3000/routes.html",
+    "verify:cfb": "node scripts/verify_cfb.mjs"
   },
   "engines": {
     "node": "22.x"

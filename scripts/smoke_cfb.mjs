@@ -1,0 +1,15 @@
+import fs from "node:fs";
+import { createCfbSim, KIND } from "../public/cfbsim.js";
+const base = new URL("../public/data/cfb/", import.meta.url);
+const league = JSON.parse(fs.readFileSync(new URL("league.json", base)));
+const sim = createCfbSim(league, "2026");
+const off = JSON.parse(fs.readFileSync(new URL("teams/texas-a-m-2026.json", base)));
+const def = JSON.parse(fs.readFileSync(new URL("teams/texas-2026.json", base)));
+console.log("A&M WR", off.players.WR.slice(0, 3).map((p) => `${p.name} tgt ${p.targets} rec ${p.catches} yds ${p.yards}`));
+const sit = { down: 3, ytg: 4, ytoEZ: 55 };
+const t0 = Date.now();
+const rows = sim.compare(off, def, sit, { reps: 800 });
+console.log(`compare ${rows.length} calls in ${Date.now() - t0} ms`);
+for (const r of rows) console.log(r.label.padEnd(32), `epa ${r.summary.epa.toFixed(3)} succ ${(r.summary.success * 100).toFixed(0)}% 1st ${(r.summary.firstDown * 100).toFixed(0)}% to ${(r.summary.turnover * 100).toFixed(1)}% pools ${r.summary.offensePool.n}/${r.summary.defensePool.n} (${r.summary.offensePool.level} | ${r.summary.defensePool.level})`);
+const one = sim.simulate({ kind: KIND.RUSH, playerId: 0 }, off, def, { down: 1, ytg: 10, ytoEZ: 75 }, { reps: 2000 });
+console.log("1st&10 run", JSON.stringify({ epa: one.summary.epa.toFixed(3), ypp: one.summary.yardsMean.toFixed(2), q: one.summary.yardsQ, stuff: one.summary.stuff.toFixed(3) }));

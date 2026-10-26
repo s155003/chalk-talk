@@ -197,7 +197,8 @@ export default async function handler(req, res) {
       }
       convo.push({ role: "user", content: results });
     }
-    res.status(200).json({ text: text.replace(new RegExp(String.fromCharCode(8212), "g"), ","), board: proposedBoard, usage, model: MODEL });
+    const plain = text.replace(new RegExp(String.fromCharCode(8212), "g"), ",").replace(/\*\*/g, "").replace(/^#+\s*/gm, "");
+    res.status(200).json({ text: plain, board: proposedBoard, usage, model: MODEL });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message || "Server error" });

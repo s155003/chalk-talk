@@ -4,3 +4,4 @@ node_modules/
 .env.local
 screenshots/
 __pycache__/
+data/cfb/*.parquet

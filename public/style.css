@@ -155,3 +155,31 @@ table.sheet .tag { font-family: var(--chalkfont); font-size: 1.05rem; color: var
 .crow { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
 
 .prose { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 8px; }
+
+/* College game page */
+.teambar { display: grid; grid-template-columns: 2.2fr 0.8fr 2.2fr 0.7fr 0.7fr 1fr; gap: 8px; border: 1px solid var(--line); background: var(--panel); padding: 10px 12px; margin-bottom: 14px; }
+@media (max-width: 900px) { .teambar { grid-template-columns: 1fr 1fr; } }
+.callbar { margin-top: 10px; border: 1px solid var(--line); background: var(--panel); padding: 10px 12px; }
+#board .dot { stroke: var(--chalk); stroke-width: 0.18; cursor: default; }
+#board .dot.off { fill: var(--off-color, #7a1f2b); }
+#board .dot.def { fill: var(--def-color, #1f3f7a); }
+#board .dot.ball-carrier { stroke: var(--yellow); stroke-width: 0.32; }
+#board .num { font-family: var(--chalkfont); font-size: 1.15px; fill: var(--chalk); text-anchor: middle; pointer-events: none; }
+#board .pos { font-family: var(--chalkfont); font-size: 0.95px; fill: var(--chalk); fill-opacity: 0.75; text-anchor: middle; pointer-events: none; }
+#board .ballpath { fill: none; stroke: var(--yellow); stroke-width: 0.22; stroke-dasharray: 0.6 0.4; }
+.tabs { display: flex; gap: 6px; margin-bottom: 8px; }
+.tab { border: 1px solid var(--border); background: var(--page); color: var(--ink2); border-radius: var(--radius); padding: 3px 10px; cursor: pointer; font-size: 0.8rem; }
+.tab.sel { background: var(--hover); color: var(--ink); border-color: var(--yellow); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 0.84rem; }
+.kv .label { font-size: 0.64rem; font-weight: 680; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+#personnel { margin-top: 10px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 700px) { .two { grid-template-columns: 1fr; } }
+table.sheet td.name { white-space: nowrap; }
+table.sheet tr.hl td { background: var(--hover); }
+.teamname { font-family: var(--chalkfont); font-size: 1.1rem; color: var(--chalk); }
+.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--chalk); }
+.pcard { border: 1px solid var(--line); background: var(--page); padding: 8px 10px; margin: 8px 0; display: flex; gap: 10px; align-items: center; }
+.pcard img { width: 44px; height: 44px; object-fit: cover; border-radius: var(--radius); background: var(--line); }
+.pcard .pname { color: var(--ink); font-weight: 600; }
+.pcard .pstat { font-size: 0.78rem; color: var(--muted); }
